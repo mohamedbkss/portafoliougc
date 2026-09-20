@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed | UGC Tech &amp; Skincare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #EEF0F4;
+    --bg-soft: #E4E7EE;
+    --card: #FCFCFB;
+    --ink: #14171C;
+    --ink-soft: #545B66;
+    --line: #D3D7DF;
+    --tech: #375FFF;
+    --tech-deep: #24409E;
+    --skin: #E8A0A0;
+    --skin-deep: #B15C6E;
+    --radius: 22px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Instrument Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family: 'Bricolage Grotesque', sans-serif;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  p{ margin:0; }
+  a{ color: inherit; text-decoration: none; }
+  img, video{ max-width:100%; display:block; }
+  section{ padding: 96px 32px; }
+  .wrap{ max-width: 1160px; margin: 0 auto; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position: sticky; top:0; z-index: 50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 20px 32px;
+    background: rgba(238,240,244,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand{
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight: 700; font-size: 1.15rem;
+  }
+  .navlinks{ display:flex; gap: 28px; font-size: 0.92rem; color: var(--ink-soft); }
+  .navlinks a:hover{ color: var(--ink); }
+  .navlinks{ display:none; }
+  @media (min-width: 760px){ .navlinks{ display:flex; } }
+  .status-pill{
+    display:flex; align-items:center; gap:8px;
+    font-size: 0.8rem; color: var(--ink-soft);
+    border: 1px solid var(--line); border-radius: 99px;
+    padding: 6px 14px 6px 10px;
+    background: var(--card);
+  }
+  .dot{ width:7px; height:7px; border-radius:50%; background:#4CAF6D; flex:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding-top: 64px;
+    display:grid; grid-template-columns: 1fr; gap: 56px;
+  }
+  @media (min-width: 900px){
+    .hero{ grid-template-columns: 1.05fr 0.95fr; align-items:center; }
+  }
+  .hero-kicker{
+    font-size: 0.95rem; color: var(--ink-soft); max-width: 34ch;
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height: 1.04;
+    font-weight: 700;
+    margin-top: 18px;
+  }
+  .hero-desc{
+    margin-top: 22px;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    line-height: 1.55;
+  }
+  .chip-row{ display:flex; flex-wrap:wrap; gap: 10px; margin-top: 26px; }
+  .chip{
+    display:inline-flex; align-items:center; gap:8px;
+    padding: 9px 16px; border-radius: 99px;
+    font-size: 0.88rem; font-weight: 600;
+    border: 1px solid transparent;
+  }
+  .chip-tech{ background: #E5EAFF; color: var(--tech-deep); }
+  .chip-skin{ background: #FBEBEE; color: var(--skin-deep); }
+  .chip-dot{ width:7px; height:7px; border-radius:50%; }
+  .chip-tech .chip-dot{ background: var(--tech); }
+  .chip-skin .chip-dot{ background: var(--skin-deep); }
+
+  .cta-row{ display:flex; flex-wrap:wrap; gap: 14px; margin-top: 34px; }
+  .btn{
+    padding: 14px 24px; border-radius: 14px;
+    font-weight: 600; font-size: 0.95rem;
+    display:inline-flex; align-items:center; gap:10px;
+    border: 1px solid var(--ink);
+  }
+  .btn-solid{ background: var(--ink); color: var(--bg); }
+  .btn-ghost{ background: transparent; color: var(--ink); }
+
+  /* phone stack */
+  .phone-stack{
+    position:relative;
+    height: 460px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .phone{
+    position:absolute;
+    width: 200px; aspect-ratio: 9/17.5;
+    background: #0E0F12;
+    border-radius: 34px;
+    padding: 8px;
+    box-shadow: 0 30px 60px -20px rgba(20,23,28,0.35);
+  }
+  .phone video, .phone .poster-fallback{
+    width:100%; height:100%; object-fit:cover; border-radius: 26px;
+    background:#000;
+  }
+  .phone-a{ transform: rotate(-7deg) translate(-58px, 6px); z-index:2; }
+  .phone-b{ transform: rotate(6deg) translate(58px, -10px); z-index:1; }
+  .phone-tag{
+    position:absolute; bottom:-14px; left:50%; transform:translateX(-50%);
+    font-size: 0.68rem; font-weight:700; text-transform:none;
+    background: var(--card); border:1px solid var(--line);
+    padding: 5px 10px; border-radius: 99px; white-space:nowrap;
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{ max-width: 56ch; margin-bottom: 48px; }
+  .section-head h2{ font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight:700; }
+  .section-head p{ margin-top:14px; color: var(--ink-soft); font-size:1rem; line-height:1.55; }
+
+  /* ---------- NICHOS ---------- */
+  #nichos{ background: var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .niche-grid{ display:grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width:800px){ .niche-grid{ grid-template-columns: 1fr 1fr; } }
+  .niche-card{
+    padding: 32px; border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .niche-card.tech{ background: linear-gradient(180deg, #E9EDFF 0%, var(--bg) 55%); }
+  .niche-card.skin{ background: linear-gradient(180deg, #FBEDEF 0%, var(--bg) 55%); }
+  .niche-icon{
+    width: 44px; height:44px; border-radius: 12px;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 1.2rem; margin-bottom: 20px;
+  }
+  .tech .niche-icon{ background: var(--tech); color:#fff; }
+  .skin .niche-icon{ background: var(--skin-deep); color:#fff; }
+  .niche-card h3{ font-size:1.3rem; font-weight:700; }
+  .niche-card p{ margin-top:12px; color: var(--ink-soft); line-height:1.6; font-size:0.96rem; }
+  .format-list{ margin-top:18px; display:flex; flex-wrap:wrap; gap:8px; list-style:none; padding:0; }
+  .format-list li{
+    font-size:0.8rem; color: var(--ink);
+    border:1px solid var(--line); background: var(--card);
+    padding:5px 11px; border-radius: 99px;
+  }
+
+  /* ---------- REEL ---------- */
+  .reel-grid{ display:grid; grid-template-columns: 1fr; gap: 40px; }
+  @media (min-width:760px){ .reel-grid{ grid-template-columns: 1fr 1fr; } }
+  .reel-card{ }
+  .reel-frame{
+    background:#0E0F12; border-radius: 28px; padding:10px;
+    max-width: 300px; margin: 0 auto;
+  }
+  .reel-frame video{ border-radius:20px; aspect-ratio: 9/16; object-fit:cover; background:#000; }
+  .reel-caption{ margin-top: 20px; text-align:center; }
+  .reel-caption .label{
+    display:inline-block; font-size:0.78rem; font-weight:700;
+    padding:4px 10px; border-radius:99px; margin-bottom:8px;
+  }
+  .reel-card.tech .label{ background:#E5EAFF; color:var(--tech-deep); }
+  .reel-card.skin .label{ background:#FBEBEE; color:var(--skin-deep); }
+  .reel-caption h3{ font-size:1.05rem; font-weight:700; }
+  .reel-caption p{ margin-top:6px; color:var(--ink-soft); font-size:0.9rem; max-width:32ch; margin-left:auto; margin-right:auto; }
+  .demo-note{
+    margin-top: 56px; text-align:center; font-size:0.88rem; color: var(--ink-soft);
+    max-width: 52ch; margin-left:auto; margin-right:auto; line-height:1.6;
+  }
+
+  /* ---------- PROCESO ---------- */
+  #proceso{ background: var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .process-list{ display:grid; grid-template-columns: 1fr; gap: 0; }
+  @media (min-width:760px){ .process-list{ grid-template-columns: repeat(4,1fr); gap: 24px; } }
+  .process-step{
+    padding: 24px 0; border-top: 1px solid var(--line);
+  }
+  @media (min-width:760px){ .process-step{ border-top:none; padding:0; } }
+  .process-step .num{ font-size:0.8rem; color: var(--ink-soft); font-weight:600; }
+  .process-step h3{ margin-top:10px; font-size:1.05rem; font-weight:700; }
+  .process-step p{ margin-top:8px; color:var(--ink-soft); font-size:0.9rem; line-height:1.55; }
+
+  /* ---------- REDES ---------- */
+  .social-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+  @media (min-width:700px){ .social-grid{ grid-template-columns: repeat(4,1fr); } }
+  .social-card{
+    border: 1.5px dashed var(--line);
+    border-radius: 18px;
+    padding: 26px 18px;
+    text-align:center;
+    background: var(--card);
+  }
+  .social-card .platform-icon{
+    width:38px; height:38px; margin: 0 auto 14px;
+    border-radius: 10px; background: var(--bg-soft);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1rem; color: var(--ink-soft);
+  }
+  .social-card .platform{ font-weight:700; font-size:0.95rem; }
+  .social-card .placeholder{
+    margin-top:6px; font-size:0.78rem; color: var(--ink-soft);
+  }
+  .social-note{
+    margin-top: 28px; font-size: 0.85rem; color: var(--ink-soft);
+    text-align:center;
+  }
+
+  /* ---------- CONTACTO ---------- */
+  #contacto{ background: var(--ink); color: var(--bg); }
+  #contacto .section-head p{ color: #B7BCC6; }
+  #contacto .section-head h2{ color: var(--bg); }
+  .contact-panel{
+    display:grid; grid-template-columns:1fr; gap:28px;
+  }
+  @media (min-width:800px){ .contact-panel{ grid-template-columns: 1fr 1fr; } }
+  .contact-block{
+    border:1px solid #2B2F38; border-radius: var(--radius);
+    padding: 28px;
+    background: #1B1E24;
+  }
+  .contact-block .kicker{ font-size:0.8rem; color:#9BA1AC; font-weight:600; }
+  .contact-block .value{ margin-top:10px; font-size:1.15rem; font-weight:700; }
+  .contact-block .value.placeholder{ color:#6E7480; font-style: normal; }
+
+  footer{
+    padding: 32px; text-align:center; font-size:0.82rem;
+    color: var(--ink-soft); background: var(--ink);
+  }
+  footer .foot-line{ color:#7B818C; }
+
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
+    align-items:start;
+  }
+  @media (min-width:800px){
+    .about-grid{ grid-template-columns:1.05fr 0.95fr; gap:72px; }
+  }
+  .about-text{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+    line-height:1.7;
+    max-width:58ch;
+  }
+  .about-points{
+    display:grid;
+    gap:12px;
+  }
+  .about-points > div{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    padding:20px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:var(--card);
+  }
+  .about-points strong{ font-size:.98rem; }
+  .about-points span{ color:var(--ink-soft); font-size:.9rem; line-height:1.45; }
+
+  .social-single{ grid-template-columns:minmax(220px, 360px); }
+  .social-link{ transition:transform .2s ease, border-color .2s ease; }
+  .social-link:hover{ transform:translateY(-3px); border-color:var(--ink); }
+  .contact-single{ grid-template-columns:minmax(260px, 520px); }
+  .contact-link{ display:block; transition:transform .2s ease, border-color .2s ease; }
+  .contact-link:hover{ transform:translateY(-3px); border-color:#555B66; }
+  .contact-small{ margin-top:8px; color:#9BA1AC; font-size:.88rem; line-height:1.45; }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Mohamed · UGC</div>
+  <div class="navlinks">
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#contenido">Contenido</a>
+    <a href="#proceso">Cómo trabajo</a>
+    <a href="#redes">TikTok</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <div class="status-pill"><span class="dot"></span>Disponible para colaboraciones</div>
+</nav>
+
+<section class="hero wrap">
+  <div>
+    <p class="hero-kicker">UGC · Tech &amp; Skincare</p>
+    <h1>Contenido que parece contenido,<br>no un anuncio.</h1>
+    <p class="hero-desc">
+      Soy Mohamed y creo vídeos UGC sobre tecnología y skincare.
+      Me gusta probar productos, enseñar cómo se usan y dar mi opinión de una forma sencilla y natural.
+    </p>
+    <div class="chip-row">
+      <span class="chip chip-tech"><span class="chip-dot"></span>Tech</span>
+      <span class="chip chip-skin"><span class="chip-dot"></span>Skincare &amp; cuidado personal</span>
+    </div>
+    <div class="cta-row">
+      <a href="#contenido" class="btn btn-solid">Ver mi contenido</a>
+      <a href="#contacto" class="btn btn-ghost">Hablemos</a>
+    </div>
+  </div>
+
+  <div class="phone-stack">
+    <div class="phone phone-b">
+      <video muted loop playsinline preload="metadata" poster="assets/personalcare-poster.jpg" onmouseover="this.play()" onmouseout="this.pause()">
+        <source src="assets/personalcare-demo.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="phone phone-a">
+      <video muted loop playsinline preload="metadata" poster="assets/tech-poster.jpg" onmouseover="this.play()" onmouseout="this.pause()">
+        <source src="assets/tech-demo.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+
+<section id="sobre-mi">
+  <div class="wrap about-grid">
+    <div>
+      <div class="section-head">
+        <h2>Un poco sobre mí</h2>
+      </div>
+      <p class="about-text">
+        Soy creador UGC y me centro en dos cosas que de verdad me gustan: la tecnología y el cuidado de la piel.
+        No intento hacer que todo parezca perfecto. Prefiero que el vídeo tenga ritmo, se entienda rápido y se sienta como alguien recomendándote un producto de verdad.
+      </p>
+    </div>
+    <div class="about-points">
+      <div><strong>📱 Tech</strong><span>Gadgets, accesorios, apps y productos para setup.</span></div>
+      <div><strong>🧴 Skincare</strong><span>Rutinas, primeras impresiones y cuidado personal.</span></div>
+      <div><strong>🎥 UGC</strong><span>Vídeos verticales pensados para TikTok, Reels y anuncios.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="nichos">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Lo que me gusta crear</h2>
+      <p>Trabajo principalmente con productos de tech y skincare. Son temas que me gustan y eso se nota cuando hablo de ellos.</p>
+    </div>
+    <div class="niche-grid">
+      <div class="niche-card tech">
+        <div class="niche-icon">▮▮</div>
+        <h3>Tecnología</h3>
+        <p>Gadgets, accesorios, periféricos y productos para el setup. Unboxing, primeras impresiones y pruebas de uso.</p>
+        <ul class="format-list">
+          <li>Unboxing</li>
+          <li>Review honesta</li>
+          <li>Setup / desk tour</li>
+          <li>Comparativas</li>
+        </ul>
+      </div>
+      <div class="niche-card skin">
+        <div class="niche-icon">✦</div>
+        <h3>Skincare &amp; cuidado personal</h3>
+        <p>Productos de skincare y cuidado personal. Rutinas, primeras impresiones y vídeos mostrando cómo los uso.</p>
+        <ul class="format-list">
+          <li>Rutina paso a paso</li>
+          <li>Primera impresión</li>
+          <li>Antes / después</li>
+          <li>Grooming</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contenido">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Mi contenido</h2>
+      <p>Dos ejemplos que he grabado para enseñar cómo presento productos y cómo edito mis vídeos.</p>
+    </div>
+    <div class="reel-grid">
+      <div class="reel-card tech">
+        <div class="reel-frame">
+          <video controls playsinline preload="metadata" poster="assets/tech-poster.jpg">
+            <source src="assets/tech-demo.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="reel-caption">
+          <span class="label">Tech</span>
+          <h3>Setup &amp; teclado mecánico</h3>
+          <p>Un ejemplo de cómo presento un producto tech de forma rápida y cercana.</p>
+        </div>
+      </div>
+      <div class="reel-card skin">
+        <div class="reel-frame">
+          <video controls playsinline preload="metadata" poster="assets/personalcare-poster.jpg">
+            <source src="assets/personalcare-demo.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="reel-caption">
+          <span class="label">Cuidado personal</span>
+          <h3>Rutina de grooming</h3>
+          <p>Un ejemplo de contenido de cuidado personal, sencillo y directo.</p>
+        </div>
+      </div>
+    </div>
+    <p class="demo-note">Estos vídeos son ejemplos propios para enseñar mi estilo. No son colaboraciones pagadas.</p>
+  </div>
+</section>
+
+<section id="proceso">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Cómo trabajo</h2>
+      <p>Intento que el proceso sea sencillo y claro desde el principio.</p>
+    </div>
+    <div class="process-list">
+      <div class="process-step">
+        <p class="num">01</p>
+        <h3>Brief</h3>
+        <p>Hablamos de lo que necesitas, el producto y el estilo del vídeo.</p>
+      </div>
+      <div class="process-step">
+        <p class="num">02</p>
+        <h3>Grabación</h3>
+        <p>Grabo varias tomas para quedarme con las que mejor funcionan.</p>
+      </div>
+      <div class="process-step">
+        <p class="num">03</p>
+        <h3>Edición ligera</h3>
+        <p>Edito el vídeo con cortes, ritmo, texto y subtítulos cuando hacen falta.</p>
+      </div>
+      <div class="process-step">
+        <p class="num">04</p>
+        <h3>Entrega</h3>
+        <p>Te entrego el vídeo final en formato vertical, listo para publicar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="redes">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Donde puedes ver más</h2>
+      <p>Ahora mismo mi contenido UGC está en TikTok.</p>
+    </div>
+    <div class="social-grid social-single">
+      <a class="social-card social-link" href="https://www.tiktok.com/@mohadailyugc" target="_blank" rel="noopener noreferrer">
+        <div class="platform-icon">TT</div>
+        <p class="platform">TikTok</p>
+        <p class="placeholder">@mohadailyugc</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>¿Hacemos algo juntos?</h2>
+      <p>Si tienes una marca de tech, skincare o cuidado personal y buscas contenido UGC, escríbeme.</p>
+    </div>
+    <div class="contact-panel contact-single">
+      <a class="contact-block contact-link" href="https://www.tiktok.com/@mohadailyugc" target="_blank" rel="noopener noreferrer">
+        <p class="kicker">TikTok</p>
+        <p class="value">@mohadailyugc</p>
+        <p class="contact-small">Puedes contactarme directamente desde mi perfil.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Mohamed · UGC</p>
+  <p class="foot-line">Tech · Skincare · Cuidado personal</p>
+</footer>
+
+</body>
+</html>
